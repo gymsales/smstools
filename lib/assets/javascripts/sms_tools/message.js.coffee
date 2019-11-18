@@ -44,10 +44,10 @@ class SmsTools.Message
       SmsTools['use_gsm_encoding']
 
   _encoding: ->
-    if @asciiPattern.test(@text)
-      'ascii'
-    else if @use_gsm_encoding() and @gsmEncodingPattern.test(@text)
+    if @use_gsm_encoding() and @gsmEncodingPattern.test(@text)
       'gsm'
+    else if @asciiPattern.test(@text)
+      'ascii'
     else
       'unicode'
 

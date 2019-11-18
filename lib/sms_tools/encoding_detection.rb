@@ -25,10 +25,10 @@ module SmsTools
 
     def encoding
       @encoding ||=
-        if text.ascii_only?
-          :ascii
-        elsif SmsTools.use_gsm_encoding? and GsmEncoding.valid?(text)
+        if SmsTools.use_gsm_encoding? and GsmEncoding.valid?(text)
           :gsm
+        elsif text.ascii_only?
+          :ascii
         else
           :unicode
         end
