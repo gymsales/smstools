@@ -22,12 +22,12 @@ class SmsTools.Message
     '|':  true
     '€':  true
     '\\': true
+    '↵':  true
 
   asciiPattern: /^[\x00-\x7F]*$/
   gsmEncodingPattern: /^[0-9a-zA-Z@Δ¡¿£_!Φ"¥Γ#èΛ¤éΩ%ùΠ&ìΨòΣçΘΞ:Ø;ÄäøÆ,<Ööæ=ÑñÅß>ÜüåÉ§à€~ \$\.\-\+\(\)\*\\\/\?\|\^\}\{\[\]\'\r\n]*$/
 
   constructor: (@text) ->
-    @text                   = @text.replace /\r\n?/g, "\n"
     @encoding               = @_encoding()
     @length                 = @_length()
     @concatenatedPartsCount = @_concatenatedPartsCount()
@@ -67,7 +67,8 @@ class SmsTools.Message
     length = @text.length
 
     if @encoding == 'gsm'
-      for char in @text
+      text = @text.replace /\r|\n/g, '↵'
+      for char in text
         length += 1 if @doubleByteCharsInGsmEncoding[char]
 
     length

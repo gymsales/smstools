@@ -138,6 +138,7 @@ module SmsTools
     }.freeze
 
     UTF8_TO_GSM_EXTENSION_TABLE = {
+      0xA    => "\x1B\x0A", # FORM FEED1
       0x000C => "\x1B\x0A", # FORM FEED
       0x005E => "\x1B\x14", # CIRCUMFLEX ACCENT
       0x007B => "\x1B\x28", # LEFT CURLY BRACKET
